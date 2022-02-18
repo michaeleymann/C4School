@@ -4,7 +4,7 @@ class Energieniveau {
       this.id = id,
       this.y = ypos,
       this.x = 0,
-      this.width = 100,
+      this.width = 150,
       this.thickness = 2,
       this.color = "#000000",
       this.highlightColor = "#cc0000",
