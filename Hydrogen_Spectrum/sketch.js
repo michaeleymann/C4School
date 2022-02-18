@@ -1,21 +1,48 @@
 let niveaus = []
+let uebergaenge = []
+let state = "Uebergaenge"
+let niveauButton;
+let uberButton;
 
 function setup(){
     createCanvas(500,500);
+    //!! id's (first number) need to be 0,1,2 etc
+    niveaus.push(new Energieniveau(0, 300))
+    niveaus.push(new Energieniveau(1, 150))
+    niveaus.push(new Energieniveau(2, 70))
 
-    niveaus.push(new Energieniveau(100))
-    niveaus.push(new Energieniveau(50))
+
+    // Button for changing states
+    niveauButton = createButton("Energieniveaus festlegen")
+    niveauButton.position(200,30)
+    niveauButton.mousePressed( function() {state = "Energieniveaus"})
+    uberButton = createButton("Übergänge festlegen")
+    uberButton.position(200,60)
+    uberButton.mousePressed( function() {state = "Uebergaenge"})
 }
 
 function mousePressed() {
-    for ( let niveau of niveaus ){
-        niveau.pressed()
+
+    if (state == "Energieniveaus") {
+        for ( let niveau of niveaus ){
+            niveau.pressed()
+        }
+    } else if ( state == "Uebergaenge") {
+        uebergaenge.push( new Uebergang(mouseX, mouseY))
+
     }
 }
 
 function mouseReleased() {
-    for ( let niveau of niveaus ){
-        niveau.released()
+
+    if ( state == "Energieniveaus" ){  
+        for ( let niveau of niveaus ){
+            niveau.released()
+        }
+    } else if ( state == "Uebergaenge" ) {
+        for ( let uebergaeng of uebergaenge){
+            uebergaeng.released()
+        }
     }
 }
 
@@ -26,6 +53,17 @@ function draw(){
         niveau.update()
         niveau.checkOver()
         niveau.show()
+    }
+
+    for ( let [index, uebergang] of uebergaenge.entries() ){
+        uebergang.update()
+        uebergang.show()
+
+        // Aufräumen
+        if ( uebergang.deleted ) {
+            uebergaenge.splice(index)
+        }
+
     }
     
 }
