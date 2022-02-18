@@ -1,6 +1,6 @@
 let niveaus = []
 let uebergaenge = []
-let state = "Uebergaenge"
+let state = "Energieniveaus"
 let niveauButton;
 let uberButton;
 
