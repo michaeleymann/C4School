@@ -4,11 +4,11 @@ class Energieniveau {
       this.id = id,
       this.y = ypos,
       this.x = 0,
-      this.width = 150,
+      this.width = 150, // CHANGE MOUSE/TOUCH FUNCTIONS WHEN CHANGING THIS!
       this.thickness = 2,
-      this.color = "#000000",
-      this.highlightColor = "#cc0000",
-      this.draggedColor = "#ff0000"
+      this.color = "#272727",
+      this.highlightColor = "#f95738",
+      this.draggedColor = "#ff2020",
       this.dragged = false,
       this.mOver = false,
       this.grabOffset = 5
@@ -52,6 +52,7 @@ class Energieniveau {
         }
     }
     
+ 
     pressed() {
         
         // Save last position before dragging so it can be reset
@@ -108,7 +109,8 @@ class Uebergang {
       this.startY = startY,
       this.endX = mouseX,
       this.endY = mouseY,
-      this.color = "#0000ff"
+      this.color = "#2cacc9",
+      this.thickness = 1,
       this.dragged = true,
       this.deleted = false
     }
@@ -133,7 +135,7 @@ class Uebergang {
 
     update() {
         if ( this.dragged ){
-            this.endX = mouseX;
+            this.endX = this.startX;
             this.endY = mouseY;
 
             // Übergänge nur zeichnen, wenn sie auf einem Niveau beginnen
@@ -150,13 +152,14 @@ class Uebergang {
     }
 
     show(){
+        strokeWeight(this.thickness)
         stroke(this.color)
         fill(this.color)
         line(this.startX, this.startY, this.endX, this.endY)
         if ( this.startY < this.endY) {
-            triangle(this.endX, this.endY-1, this.endX-4, this.endY-10, this.endX+4, this.endY-10)
+            triangle(this.endX, this.endY-1, this.endX-3, this.endY-8, this.endX+3, this.endY-8)
         } else {
-            triangle(this.startX, this.startY-1, this.startX-4, this.startY-10, this.startX+4, this.startY-10)
+            triangle(this.startX, this.startY-1, this.startX-3, this.startY-8, this.startX+3, this.startY-8)
         }
 
     }

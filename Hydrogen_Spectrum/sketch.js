@@ -5,6 +5,8 @@ let niveauButton;
 let uberButton;
 let deleteButton;
 
+
+// ----------- P5 SETUP  -----------
 function setup(){
 
     createCanvas(500,500);
@@ -28,13 +30,14 @@ function setup(){
     deleteButton.mousePressed( function() {uebergaenge = []})
 }
 
+// ----------- MOUSE FUNCTIONS -----------
 function mousePressed() {
 
     if (state == "Energieniveaus") {
         for ( let niveau of niveaus ){
             niveau.pressed()
         }
-    } else if ( state == "Uebergaenge") {
+    } else if ( state == "Uebergaenge" && mouseX < 150) {
         uebergaenge.push( new Uebergang(mouseX, mouseY))
     }
 }
@@ -54,8 +57,26 @@ function mouseReleased() {
     }
 }
 
+// ----------- TOUCH FUNCTIONS -----------
+function touchStarted(){
+    if (state == "Energieniveaus") {
+        for ( let niveau of niveaus ){
+            niveau.checkOver();
+            niveau.pressed()
+
+        }
+    } else if ( state == "Uebergaenge" && mouseX < 150) {
+        uebergaenge.push( new Uebergang(mouseX, mouseY))
+    }
+}
+
+
+
+
+// ----------- P5 DRAW LOOP  -----------
+
 function draw(){
-    background(255)
+    background("#fafdf9")
 
     for ( let niveau of niveaus ){
         niveau.update()
@@ -74,3 +95,11 @@ function draw(){
 
     }
 }
+
+
+// Prevent dragging the page whil drag-&-dropping
+function preventBehavior(e) {
+    e.preventDefault(); 
+};
+
+document.addEventListener("touchmove", preventBehavior, {passive: false});
