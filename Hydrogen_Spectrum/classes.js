@@ -3,15 +3,16 @@ class Energieniveau {
     constructor(id, ypos) {
       this.id = id,
       this.y = ypos,
-      this.x = 0,
+      this.x = 80,
       this.width = 150, // CHANGE MOUSE/TOUCH FUNCTIONS WHEN CHANGING THIS!
       this.thickness = 2,
-      this.color = "#272727",
-      this.highlightColor = "#f95738",
-      this.draggedColor = "#ff2020",
+      this.color = colLine,
+      this.highlightColor = colHighlight,
+      this.draggedColor = colDragged,
       this.dragged = false,
       this.mOver = false,
-      this.grabOffset = 5
+      this.grabOffset = 5,
+      this.eV = mapEnergy(this.y, true)
     }
 
     update() {
@@ -19,6 +20,7 @@ class Energieniveau {
         // Linie mit der Maus bewegen
         if (this.dragged) {
           this.y = mouseY
+          this.eV = mapEnergy(this.y, true)
         
           // Übergangspfeile mit Niveaus bewegen, wenn diese verschoben werden
           this.updateUeberaenge();
@@ -76,8 +78,8 @@ class Energieniveau {
             }
         }
         for ( let pos of positions){
-            // 5 is the margin for not stacking niveaus on top of each other
-            if ( this.y > (pos-5) && this.y < (pos+5) ){
+            // 3 is the margin for not stacking niveaus on top of each other
+            if ( this.y > (pos-3) && this.y < (pos+3) ){
                 this.y = this.lastpos
                 this.updateUeberaenge()
             }
@@ -99,6 +101,18 @@ class Energieniveau {
             stroke(this.color)
             line(this.x, this.y, this.x + this.width, this.y)
         }
+
+        
+        // Write eV Numver to each Energieniveau
+        push();
+        fill(colLine);
+        noStroke();
+        textSize(10)
+        textFont("monospace")
+        textAlign(RIGHT)
+        text(this.eV.toFixed(1) + " eV", this.x - 10, this.y + 3)
+        pop()
+        
     }
 }
 
@@ -109,10 +123,13 @@ class Uebergang {
       this.startY = startY,
       this.endX = mouseX,
       this.endY = mouseY,
-      this.color = "#2cacc9",
+      this.color = colArrow,
       this.thickness = 1,
       this.dragged = true,
-      this.deleted = false
+      this.deleted = false,
+      this.eV = mapEnergy(abs(this.startY-this.endY), false),
+      this.wavelength = 1239.8/(this.eV+0.00000001)
+      this.bande = new Bande (350, 420, this.wavelength, 400, colHighlight, false)
     }
     
     released() {
@@ -146,9 +163,17 @@ class Uebergang {
                     this.deleted = false;
                     this.startY = niveau.y;
                     this.startLocked = niveau.id;
-                } 
+                }  
             }
         }
+
+        this.eV = mapEnergy(abs(this.startY-this.endY), false);
+        this.wavelength = 1239.8/(this.eV+0.00000001);
+        this.bande.x = map(
+            this.bande.xOrigin + this.wavelength, 
+            this.bande.xOrigin + 100, 
+            this.bande.xOrigin + 2000, 
+            this.bande.xOrigin, this.bande.xOrigin+this.bande.width);
     }
 
     show(){
@@ -162,14 +187,30 @@ class Uebergang {
             triangle(this.startX, this.startY-1, this.startX-3, this.startY-8, this.startX+3, this.startY-8)
         }
 
+    this.bande.show()
     }
+
+
 }
 
 // Banden für das Wasserstoffatom, berechnet aus den Übergängen
 class Bande {
-    constructor() {
-
+    constructor(xOrigin, yOrigin, wavelength, width, color, isFixed) {
+        this.xOrigin = xOrigin,
+        this.x = map(xOrigin + wavelength, xOrigin+100, xOrigin+2000, xOrigin, xOrigin+width),
+        this.y = yOrigin,
+        this.length = 20,
+        this.width = width,
+        this.weight = 1,
+        this.color = color,
+        this.fixed = isFixed
+    
     }
 
-    // Methoden
-}
+    show() {
+        strokeWeight(this.weight)
+        stroke(this.color)
+        line(this.x, this.y, this.x, this.y + this.length)
+    }
+   
+}   

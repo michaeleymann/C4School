@@ -1,5 +1,6 @@
 body {
-    background-color: #fafdf9;
+    background-color: #fffcf2;
+    font-family: monospace;
 }
 
 canvas {
@@ -10,3 +11,26 @@ canvas {
     -ms-user-select: none;
     user-select: none;
 }
+
+button {
+    background-color: #ccc5b9; /* Green */
+    border: none;
+    font-family: monospace;
+    color: #4b4b4b;
+    padding: 2px 4px;
+    margin: 2px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #0E79B2;
+}
+
+button:focus {
+    color: #fffcf2;
+    background-color: #0E79B2;
+}
+
