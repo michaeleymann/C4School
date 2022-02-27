@@ -129,7 +129,7 @@ class Uebergang {
       this.deleted = false,
       this.eV = mapEnergy(abs(this.startY-this.endY), false),
       this.wavelength = 1239.8/(this.eV+0.00000001)
-      this.bande = new Bande (350, 420, this.wavelength, 400, colHighlight, false)
+      this.bande = new Bande (350, 360, this.wavelength, 400, colHighlight, false)
     }
     
     released() {

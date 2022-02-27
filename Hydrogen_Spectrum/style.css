@@ -1,5 +1,5 @@
 body {
-    background-color: #fffcf2;
+    background-color: #201d19;
     font-family: monospace;
 }
 
@@ -13,10 +13,11 @@ canvas {
 }
 
 button {
-    background-color: #ccc5b9; /* Green */
-    border: none;
+    background-color: #201d19; /* Green */
+    border-color: #ffffff;
+    border: 1px solid;
     font-family: monospace;
-    color: #4b4b4b;
+    color: #ffffff;
     padding: 2px 4px;
     margin: 2px;
     text-align: center;
@@ -26,11 +27,10 @@ button {
 }
 
 button:hover {
-    color: #0E79B2;
+    color: #eb5e28;
 }
 
-button:focus {
-    color: #fffcf2;
-    background-color: #0E79B2;
+button:active {
+    background-color: #eb5e28;
+    color: #201d19;
 }
-
