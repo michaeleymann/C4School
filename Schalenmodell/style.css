@@ -1,0 +1,36 @@
+body {
+    background-color: #201d19;
+    font-family: monospace;
+}
+
+canvas {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button {
+    background-color: #201d19; /* Green */
+    border-color: #ffffff;
+    border: 1px solid;
+    font-family: monospace;
+    color: #ffffff;
+    padding: 2px 4px;
+    margin: 2px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #eb5e28;
+}
+
+button:active {
+    background-color: #eb5e28;
+    color: #201d19;
+}
