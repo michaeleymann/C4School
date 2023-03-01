@@ -92,8 +92,8 @@ function setup(){
 function draw(){
 
  
-    resizeCanvas(windowWidth,windowHeight)
-    scale(min(windowWidth/canvasWidth*0.95,windowHeight/canvasHeight*0.95))
+    //resizeCanvas(windowWidth,windowHeight)
+    //scale(min(windowWidth/canvasWidth*0.95,windowHeight/canvasHeight*0.95))
 
     // -----------  GRAPHIKELEMENTE  -----------
     background(colBG)
