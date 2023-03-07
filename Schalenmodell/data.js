@@ -15,8 +15,7 @@ let description = {
     x:ds.x,
     y:ds.y,
     max:ds.max,
-    text: "ANLEITUNG\n\n\Klicke auf «+» um ein Elektron hinzuzufügen oder auf «-» um ein Elektron zu entfernen. Du kannst auch ein bestimmtes Atom auswählen, um dessen Elektronenkonfiguration zu sehen.\n\
-    \n\n\n\n\n\n\nHinweis: Die Elektronenkonfigurationen in dieser Applikation sind etwas vereinfacht. Bei den Elementen des d- und f-Blocks stimmen sie daher öfters nicht vollständig mit den beobachteten Elektronenkonfigurationen überein. "
+    text: "ANLEITUNG\n\n\Klicke auf «+» um ein Elektron hinzuzufügen oder auf «-» um ein Elektron zu entfernen. Du kannst auch ein bestimmtes Atom auswählen, um dessen Elektronenkonfiguration zu sehen."
 }
 
 let energy_levels = 
@@ -84,7 +83,7 @@ let electrons = // Last Number is Shell Number
 let atom_data = 
 [
         {
-            "name": "Hydrogen",
+            "name": "Wasserstoff",
             "appearance": "colorless gas",
             "atomic_mass": 1.008,
             "boil": 20.271,
@@ -264,7 +263,7 @@ let atom_data =
             "block": "s"
         },
         {
-            "name": "Boron",
+            "name": "Bor",
             "appearance": "black-brown",
             "atomic_mass": 10.81,
             "boil": 4200,
@@ -312,7 +311,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Carbon",
+            "name": "Kohlenstoff",
             "appearance": null,
             "atomic_mass": 12.011,
             "boil": null,
@@ -361,7 +360,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Nitrogen",
+            "name": "Stickstoff",
             "appearance": "colorless gas, liquid or solid",
             "atomic_mass": 14.007,
             "boil": 77.355,
@@ -411,7 +410,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Oxygen",
+            "name": "Sauerstoff",
             "appearance": null,
             "atomic_mass": 15.999,
             "boil": 90.188,
@@ -462,7 +461,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Fluorine",
+            "name": "Fluor",
             "appearance": null,
             "atomic_mass": 18.9984031636,
             "boil": 85.03,
@@ -567,7 +566,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Sodium",
+            "name": "Natrium",
             "appearance": "silvery white metallic",
             "atomic_mass": 22.989769282,
             "boil": 1156.09,
@@ -735,7 +734,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Silicon",
+            "name": "Silikon",
             "appearance": "crystalline, reflective with bluish-tinged faces",
             "atomic_mass": 28.085,
             "boil": 3538,
@@ -793,7 +792,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Phosphorus",
+            "name": "Phosphor",
             "appearance": "colourless, waxy white, yellow, scarlet, red, violet, black",
             "atomic_mass": 30.9737619985,
             "boil": null,
@@ -852,7 +851,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Sulfur",
+            "name": "Schwefel",
             "appearance": "lemon yellow sintered microcrystals",
             "atomic_mass": 32.06,
             "boil": 717.8,
@@ -912,7 +911,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Chlorine",
+            "name": "Chlor",
             "appearance": "pale yellow-green gas",
             "atomic_mass": 35.45,
             "boil": 239.11,
@@ -1035,7 +1034,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Potassium",
+            "name": "Kalium",
             "appearance": "silvery gray",
             "atomic_mass": 39.09831,
             "boil": 1032,
@@ -1230,7 +1229,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Titanium",
+            "name": "Titan",
             "appearance": "silvery grey-white metallic",
             "atomic_mass": 47.8671,
             "boil": 3560,
@@ -1365,7 +1364,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Chromium",
+            "name": "Chrom",
             "appearance": "silvery metallic",
             "atomic_mass": 51.99616,
             "boil": 2944,
@@ -1434,7 +1433,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Manganese",
+            "name": "Mangan",
             "appearance": "silvery metallic",
             "atomic_mass": 54.9380443,
             "boil": 2334,
@@ -1504,7 +1503,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Iron",
+            "name": "Eisen",
             "appearance": "lustrous metallic with a grayish tinge",
             "atomic_mass": 55.8452,
             "boil": 3134,
@@ -1720,7 +1719,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Copper",
+            "name": "Kupfer",
             "appearance": "red-orange metallic luster",
             "atomic_mass": 63.5463,
             "boil": 2835,
@@ -1794,7 +1793,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Zinc",
+            "name": "Zink",
             "appearance": "silver-gray",
             "atomic_mass": 65.382,
             "boil": 1180,
@@ -1959,7 +1958,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Arsenic",
+            "name": "Arsen",
             "appearance": "metallic grey",
             "atomic_mass": 74.9215956,
             "boil": null,
@@ -2010,7 +2009,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Selenium",
+            "name": "Selen",
             "appearance": "black, red, and gray (not pictured) allotropes",
             "atomic_mass": 78.9718,
             "boil": 958,
@@ -2062,7 +2061,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Bromine",
+            "name": "Brom",
             "appearance": null,
             "atomic_mass": 79.904,
             "boil": 332,
@@ -2413,7 +2412,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Niobium",
+            "name": "Niob",
             "appearance": "gray metallic, bluish when oxidized",
             "atomic_mass": 92.906372,
             "boil": 5017,
@@ -2466,7 +2465,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Molybdenum",
+            "name": "Molybdän",
             "appearance": "gray metallic",
             "atomic_mass": 95.951,
             "boil": 4912,
@@ -2738,7 +2737,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Silver",
+            "name": "Silber",
             "appearance": "lustrous white metal",
             "atomic_mass": 107.86822,
             "boil": 2435,
@@ -2886,7 +2885,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Tin",
+            "name": "Zinn",
             "appearance": "silvery-white (beta, β) or gray (alpha, α)",
             "atomic_mass": 118.7107,
             "boil": 2875,
@@ -2937,7 +2936,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Antimony",
+            "name": "Antimon",
             "appearance": "silvery lustrous gray",
             "atomic_mass": 121.7601,
             "boil": 1908,
@@ -2989,7 +2988,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Tellurium",
+            "name": "Tellur",
             "appearance": null,
             "atomic_mass": 127.603,
             "boil": 1261,
@@ -3042,7 +3041,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Iodine",
+            "name": "Iod",
             "appearance": "lustrous metallic gray, violet as a gas",
             "atomic_mass": 126.904473,
             "boil": 457.4,
@@ -3140,7 +3139,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Cesium",
+            "name": "Cäsium",
             "appearance": "silvery gold",
             "atomic_mass": 132.905451966,
             "boil": 944,
@@ -3240,7 +3239,7 @@ let atom_data =
             "block": "s"
         },
         {
-            "name": "Lanthanum",
+            "name": "Lanthan",
             "appearance": "silvery white",
             "atomic_mass": 138.905477,
             "boil": 3737,
@@ -3292,7 +3291,7 @@ let atom_data =
             "block": "f"
         },
         {
-            "name": "Cerium",
+            "name": "Cer",
             "appearance": "silvery white",
             "atomic_mass": 140.1161,
             "boil": 3716,
@@ -3397,7 +3396,7 @@ let atom_data =
             "block": "f"
         },
         {
-            "name": "Neodymium",
+            "name": "Neodym",
             "appearance": "silvery white",
             "atomic_mass": 144.2423,
             "boil": 3347,
@@ -4061,7 +4060,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Tantalum",
+            "name": "Tantal",
             "appearance": "gray blue",
             "atomic_mass": 180.947882,
             "boil": 5731,
@@ -4110,7 +4109,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Tungsten",
+            "name": "Wolfram",
             "appearance": "grayish white, lustrous",
             "atomic_mass": 183.841,
             "boil": 6203,
@@ -4308,7 +4307,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Platinum",
+            "name": "Platin",
             "appearance": "silvery white",
             "atomic_mass": 195.0849,
             "boil": 4098,
@@ -4406,7 +4405,7 @@ let atom_data =
             "block": "d"
         },
         {
-            "name": "Mercury",
+            "name": "Quecksilber",
             "appearance": "silvery",
             "atomic_mass": 200.5923,
             "boil": 629.88,
@@ -4506,7 +4505,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Lead",
+            "name": "Blei",
             "appearance": "metallic gray",
             "atomic_mass": 207.21,
             "boil": 2022,
@@ -4659,7 +4658,7 @@ let atom_data =
             "block": "p"
         },
         {
-            "name": "Astatine",
+            "name": "Astat",
             "appearance": "unknown, probably metallic",
             "atomic_mass": 210,
             "boil": 610,
@@ -5005,7 +5004,7 @@ let atom_data =
             "block": "f"
         },
         {
-            "name": "Uranium",
+            "name": "Uran",
             "appearance": null,
             "atomic_mass": 238.028913,
             "boil": 4404,

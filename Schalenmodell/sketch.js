@@ -1,16 +1,4 @@
-/* 
 
-------- TO DO ------
->> ELEKTRONENKONFIG
-make new class Elektronenkonfiguration
-push 7 objects with color and text
-Draw boxes in color with text inside
-update text 
-
->> BUTTONS
-schalter für +/- Elektronen machen
-
-*/
 
 // Funktion für gestrichelte Linien (P5)
 function setLineDash(list) {
@@ -61,6 +49,16 @@ function touchStarted(){
     }
 }
 
+// ----------- KEY FUNCTIONS -----------
+
+function keyPressed() {
+    if (keyCode == LEFT_ARROW && state > 0 ) {
+      state -= 1;
+    } else if (keyCode == RIGHT_ARROW && state < 118 ) {
+        state += 1;
+    }
+}
+
 // ----------- P5 SETUP  -----------
 function setup(){
 
@@ -70,7 +68,7 @@ function setup(){
     
     // create element objects from our atom data in data.js
     for ( let atom of atom_data ) {
-        elements.push(new Element(atom.xpos,atom.ypos,atom.number,atom.symbol, atom.shells, makeColor(atom.block,atom.period)));
+        elements.push(new Element(atom.xpos,atom.ypos,atom.name,atom.number,atom.symbol, atom.shells, makeColor(atom.block,atom.period)));
     }
     // create energy levels objects from our atom data in data.js
     for ( let e of energy_levels ) {
@@ -91,9 +89,9 @@ function setup(){
 // ----------- P5 DRAW LOOP  -----------
 function draw(){
 
- 
-    //resizeCanvas(windowWidth,windowHeight)
-    //scale(min(windowWidth/canvasWidth*0.95,windowHeight/canvasHeight*0.95))
+    scaleFactor = min(windowWidth/canvasWidth,windowHeight/canvasHeight)*0.95
+    resizeCanvas(windowWidth,windowHeight)
+    scale(scaleFactor)
 
     // -----------  GRAPHIKELEMENTE  -----------
     background(colBG)
@@ -162,11 +160,11 @@ function draw(){
     }
 
     // Periodensystem zeichnen
-    noStroke();
-    fill(colLine)
-    textAlign(CENTER)
-    textSize(txt.heading)
-    text("PERIODENSYSTEM", ps.x+ps.size*10,ps.y+ps.size)
+    //noStroke();
+    //fill(colLine)
+    //textAlign(CENTER)
+    //textSize(txt.heading)
+    //text("PERIODENSYSTEM", ps.x+ps.size*10,ps.y+ps.size)
     for ( let e of elements ) {
         e.show();
     }
@@ -183,14 +181,34 @@ function draw(){
 
     // Elektronenkonfiguratin zeichnen
     noStroke();
-    fill(colLine)
-    textAlign(CENTER)
-    textSize(txt.heading)
+    fill(colLine);
+    textAlign(CENTER);
+    textSize(txt.heading);
     text("ELEKTRONENKONFIGURATION", cn.x+cn.size*3.5,cn.y-20)
     for ( let c of configs ) {
         c.update();
         c.show();
     }
+
+    // Ausgewähltes Element zeichnen:
+    stroke(colLine);
+    noFill()
+    textAlign(CENTER);
+    rect(el.x,el.y,el.w,el.h);
+    noStroke()
+    fill(colLine)
+    text("AKTUELLES ELEMENT",el.x+el.w/2,el.y-el.textsize*2)
+    textSize(el.textsize)
+    if (state > 0 ){
+        fill(elements[state-1].color)
+        text(elements[state-1].number,el.x+el.w/2,el.y+el.textsize*2)
+        text(elements[state-1].name,el.x+el.w/2,el.y+el.h-el.textsize)
+        textSize(el.textsize*4)
+        text(elements[state-1].symbol,el.x+el.w/2,el.y+el.h/2+el.textsize*1.5)
+        
+        //console.log(elements[state-1].name)
+    }
+    
 
     // Buttons
     for ( let b of buttons ) {
@@ -209,7 +227,7 @@ function draw(){
     // TEXT
     noStroke();
     fill(colLine)
-    textAlign(LEFT)
+    textAlign(CENTER)
     textWrap(WORD);
     textSize(txt.body)
     text(description.text,description.x,description.y,description.max)

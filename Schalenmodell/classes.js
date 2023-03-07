@@ -33,10 +33,10 @@ class Button {
     }
     checkOver() {
         if ( 
-            mouseX > this.x && 
-            mouseX < ( this.x + this.width ) &&
-            mouseY > this.y &&
-            mouseY < this.y + this.height 
+            mouseX > this.x * scaleFactor && 
+            mouseX < ( this.x * scaleFactor + this.width * scaleFactor ) &&
+            mouseY > this.y * scaleFactor &&
+            mouseY < this.y * scaleFactor + this.height * scaleFactor
             ) {
             
             this.mOver = true;
@@ -90,11 +90,12 @@ class Konfiguration {
 }
 
 class Element {
-    constructor(xPos,yPos,number,symbol,ek,col) {
+    constructor(xPos,yPos,name,number,symbol,ek,col) {
         this.x = xPos*ps.size+ps.x,
         this.y = yPos*ps.size+ps.y,
         this.width = ps.size,
         this.height = ps.size,
+        this.name = name,
         this.number = number,
         this.symbol = symbol,
         this.color = col,
@@ -143,10 +144,10 @@ class Element {
 
     checkOver() {
         if ( 
-            mouseX > this.x && 
-            mouseX < ( this.x + this.width ) &&
-            mouseY > this.y &&
-            mouseY < this.y + this.height 
+            mouseX > this.x * scaleFactor && 
+            mouseX < ( this.x * scaleFactor + this.width * scaleFactor ) &&
+            mouseY > this.y * scaleFactor &&
+            mouseY < this.y * scaleFactor + this.height * scaleFactor
             ) {
             
             this.mOver = true;
