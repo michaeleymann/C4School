@@ -64,11 +64,12 @@ function setup(){
 
     textFont('Helvetica')
 
+    // create P5 canvas
     createCanvas(canvasWidth,canvasHeight);
     
     // create element objects from our atom data in data.js
     for ( let atom of atom_data ) {
-        elements.push(new Element(atom.xpos,atom.ypos,atom.name,atom.number,atom.symbol, atom.shells, makeColor(atom.block,atom.period)));
+        elements.push(new Element(atom.xpos,atom.ypos,atom.name,atom.number,atom.symbol,atom.period,atom.shells, makeColor(atom.block,atom.period)));
     }
     // create energy levels objects from our atom data in data.js
     for ( let e of energy_levels ) {
@@ -89,6 +90,7 @@ function setup(){
 // ----------- P5 DRAW LOOP  -----------
 function draw(){
 
+    // Resize canvas to window size.
     scaleFactor = min(windowWidth/canvasWidth,windowHeight/canvasHeight)*0.95
     resizeCanvas(windowWidth,windowHeight)
     scale(scaleFactor)
@@ -96,20 +98,12 @@ function draw(){
     // -----------  GRAPHIKELEMENTE  -----------
     background(colBG)
    
-    // rect to see canvas size
+    // Surrounding Rectangle
     stroke(255)
     noFill()
+    setLineDash([1,2])
     rect(0,0,canvasWidth,canvasHeight)
-    //line(0,32,1000,25) // just for allignment
    
-    /* some text i dont need atm
-    fill(colLine)
-    noStroke()
-    textAlign("left")
-    text("Elektronenkonfiguration: " + currentE,750,350)
-    text("State: " + state,750,370)
-     */
-
     // State Auswählen
     for (let e of elements ){
         e.selected = false;
@@ -118,20 +112,6 @@ function draw(){
     if (state > 0 ){
         elements[state-1].selected = true;
         currentE = elements[state-1].ek
-    }
-
-    // Elektronen einfüllen
-    state_iterator = 0;
-    for ( i = 0; i < electrons.length; i++){  
-        for (j = 0; j < electrons[i].length-1; j++) {
-            if ( state_iterator == state ) {
-                break;
-            }
-            stroke(col[electrons[i][electrons[i].length-1]-1])
-            line(lv.x+160+j*6,lv.y-5-electrons[i][j]*lv.spacing,lv.x+160+j*6,lv.y+5-electrons[i][j]*lv.spacing)
-            //circle(510+(i+1)*20,350,5)
-            state_iterator++
-        }
     }
 
     // Atom zeichnen
@@ -145,6 +125,16 @@ function draw(){
     strokeWeight(1);
     for (bahn = 0; bahn < 7; bahn++ ){
         stroke(col[bahn]);
+        if (state > 0 ){
+            if ( elements[state-1].period <= bahn) {
+                setLineDash([1,2])
+            } else {
+                setLineDash([0,0])
+            }
+        } else {
+            setLineDash([1,2])
+        }
+
         circle(at.x,at.y,(bahn+1) * at.size*2);
     }
 
@@ -177,6 +167,22 @@ function draw(){
     text("ENERGIENIVEAUS", lv.x+125,lv.y-20*lv.spacing)
     for ( let l of levels ) {
         l.show()
+    }
+
+    // Elektronen in Energieniveaus einfüllen
+    state_iterator = 0;
+    for ( i = 0; i < electrons.length; i++){  
+        for (j = 0; j < electrons[i].length-1; j++) {
+            if ( state_iterator == state ) {
+                break;
+            }
+            stroke(col[electrons[i][electrons[i].length-1]-1])
+            strokeWeight(1.5)
+            setLineDash([0,0])
+            line(lv.x+160+j*6,lv.y-5-electrons[i][j]*lv.spacing,lv.x+160+j*6,lv.y+5-electrons[i][j]*lv.spacing)
+            //circle(510+(i+1)*20,350,5)
+            state_iterator++
+        }
     }
 
     // Elektronenkonfiguratin zeichnen

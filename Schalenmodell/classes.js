@@ -90,7 +90,7 @@ class Konfiguration {
 }
 
 class Element {
-    constructor(xPos,yPos,name,number,symbol,ek,col) {
+    constructor(xPos,yPos,name,number,symbol,period,ek,col) {
         this.x = xPos*ps.size+ps.x,
         this.y = yPos*ps.size+ps.y,
         this.width = ps.size,
@@ -98,6 +98,7 @@ class Element {
         this.name = name,
         this.number = number,
         this.symbol = symbol,
+        this.period = period,
         this.color = col,
         this.mOver = true,
         this.selected = false,
