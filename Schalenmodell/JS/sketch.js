@@ -65,7 +65,8 @@ function setup(){
     textFont('Helvetica')
 
     // create P5 canvas
-    createCanvas(canvasWidth,canvasHeight);
+    let myCanvas = createCanvas(canvasWidth,canvasHeight);
+    myCanvas.parent("content_1")
     
     // create element objects from our atom data in data.js
     for ( let atom of atom_data ) {

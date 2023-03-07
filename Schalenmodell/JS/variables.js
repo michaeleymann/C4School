@@ -1,4 +1,5 @@
 // ----------- SIZE & LAYOUT SETUP  -----------
+
 let canvasWidth = 1200;
 let canvasHeight = 700;
 let ps = {x:0,y:50, size:25}; // Periodic Table Position
