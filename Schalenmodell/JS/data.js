@@ -15,7 +15,8 @@ let description = {
     x:ds.x,
     y:ds.y,
     max:ds.max,
-    text: "ANLEITUNG\n\n\Klicke auf «+» um ein Elektron hinzuzufügen oder auf «-» um ein Elektron zu entfernen. Du kannst auch ein bestimmtes Atom auswählen, um dessen Elektronenkonfiguration zu sehen."
+    text: "ANLEITUNG\n\n\Klicke auf «+» oder die rechte Pfeiltaste, um ein Proton und ein Elektron hinzuzufügen. Klicke auf «-» oder die linke Pfeiltaste, um ein Proton und ein Elektron zu entfernen. Du kannst auch ein bestimmtes Atom auswählen, um dessen Elektronenkonfigu- ration zu sehen. \n\n\n\n\n\n\
+    Weitere Informationen zur Theorie kannst du in der ausklappbaren Seitenliste (☰) lesen."
 }
 
 let energy_levels = 

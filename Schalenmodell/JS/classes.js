@@ -67,7 +67,11 @@ class Konfiguration {
         this.text = text
     }
     show() {
-        setLineDash([0,0])
+        if ( this.text == 0 ) {
+            setLineDash([1,2])
+        } else {
+            setLineDash([0,0])
+        }
         strokeWeight(1)
         textAlign(CENTER)
         textSize(cn.size*0.4)
@@ -93,6 +97,8 @@ class Element {
     constructor(xPos,yPos,name,number,symbol,period,ek,col) {
         this.x = xPos*ps.size+ps.x,
         this.y = yPos*ps.size+ps.y,
+        this.row = xPos,
+        this.column = yPos,
         this.width = ps.size,
         this.height = ps.size,
         this.name = name,
