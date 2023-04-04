@@ -61,7 +61,11 @@ function keyPressed() {
       state -= 1
     } else if (keyCode == RIGHT_ARROW && state < 118 ) { 
         state += 1
-    } /* UP DOWN FUNCTIONALITY, NOT SURE IF INCLUE THIS
+    } else if (keyCode === 32) {
+        let fs = fullscreen();
+        fullscreen( !fs );
+    }
+    /* UP DOWN FUNCTIONALITY, NOT SURE IF INCLUE THIS
     else if (keyCode == UP_ARROW ) {
         //Jump in Group Three
         if ( state == 71 ) {
