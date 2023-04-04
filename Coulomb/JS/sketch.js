@@ -52,6 +52,9 @@ function drawGraphicElements() {
         if ( x != 0) rect(canvasWidth/2+x*100-1,canvasHeight-65,2,30)
         else rect(canvasWidth/2+x*100-2,canvasHeight-70,4,40)
     }
+    for ( let x = -5; x < 6; x++) {
+        rect(canvasWidth/2+x*100+49,canvasHeight-55,2,10)
+    }
     setLineDash([1,0])
     stroke(lightYellow)
     line(50,canvasHeight-50,canvasWidth-50,canvasHeight-50)
