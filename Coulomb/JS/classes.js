@@ -19,16 +19,17 @@ class Atom {
     show(){
         noStroke()
         // set color of atom
-        if ( this.mOver && this.charge > 0 ) this.col = red1
-        else if (this.mOver && this.charge < 0) this.col = blue1
-        else if (this.charge > 0 ) this.col = red2
-        else if (this.charge < 0 ) this.col = blue2
-        else this.col = yellow1
+        if ( this.mOver && this.charge > 0 ) this.col = lightRed
+        else if (this.mOver && this.charge < 0) this.col = lightBlue
+        else if (this.charge > 0 ) this.col = darkRed
+        else if (this.charge < 0 ) this.col = darkBlue
+        else this.col = darkGrey
 
         fill(this.col)
         // draw atom
         circle(this.x,this.y,this.radius * 2)
         // make text inside atom
+        textSize(20)
         fill(colLine)
         textAlign(CENTER)
         text(this.writtenCharge,this.x,this.y+txt.heading/3)
@@ -105,8 +106,8 @@ class chargeButton {
     }
     show(visible){
         if (visible) {
-            if (this.mOver) fill(yellow1)
-            else fill(yellow2)
+            if (this.mOver) fill(lightYellow)
+            else fill(darkYellow)
             triangle(
                 this.x-buttonSize,this.y,
                 this.x+buttonSize,this.y,this.x,

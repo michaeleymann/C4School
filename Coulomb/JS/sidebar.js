@@ -1,4 +1,4 @@
-let navOpen = false;
+let navOpen = true;
 // Set the width of the sidebar and the left margin of the page content to 15rem
 function openNav() {
     document.getElementById("sidebar_1").style.width = "20rem";
