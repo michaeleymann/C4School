@@ -1,11 +1,3 @@
-/*
-TO TO
-
-- Make Triange appear above and below atoms to change charge
-
-*/
-
-
 function setLineDash(list) {
     drawingContext.setLineDash(list)
   }
@@ -94,6 +86,11 @@ function touchStarted(){
 
 // ----------- KEY FUNCTIONS -----------
 function keyPressed() {
+    if (keyCode === 32) {
+        console.log("i wanted to go fs")
+        let fs = fullscreen();
+        fullscreen( !fs );
+    }
 } // END OF KEY FUNCTIONS
 
 
