@@ -44,7 +44,7 @@ let rose = "#cc6677";
 let wine = "#882255";
 let purple = "#aa4499";
 
-
+let lightOrange = "#ee8866"
 
 
 let col1 = "#ccddaa";

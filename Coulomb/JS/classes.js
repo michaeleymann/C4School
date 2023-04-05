@@ -6,6 +6,7 @@ class Atom {
         this.dy = 0,
         this.radius = atomSize / 2,
         this.col = col,
+        this.fill = colBG,
         this.charge = charge,
         this.writtenCharge = writeCharge(this.charge)
         this.mOver = false,
@@ -17,20 +18,24 @@ class Atom {
     }
 
     show(){
-        noStroke()
+        strokeWeight(3)
         // set color of atom
-        if ( this.mOver && this.charge > 0 ) this.col = lightRed
-        else if (this.mOver && this.charge < 0) this.col = lightBlue
-        else if (this.charge > 0 ) this.col = darkRed
-        else if (this.charge < 0 ) this.col = darkBlue
-        else this.col = darkGrey
+        if ( this.mOver && this.charge > 0 ) { this.col = lightRed; this.fill = lightRed }
+        else if (this.mOver && this.charge < 0) { this.col = lightBlue; this.fill = lightBlue }
+        else if (this.charge > 0 ) { this.col = lightRed; this.fill = colBG }
+        else if (this.charge < 0 ) { this.col = lightBlue; this.fill = colBG }
+        else if (this.mOver) { this.col = darkGrey; this.fill = darkGrey }
+        else { this.col = darkGrey; this.fill = colBG }
 
-        fill(this.col)
+        stroke(this.col)
+        fill(this.fill)
+        
         // draw atom
         circle(this.x,this.y,this.radius * 2)
         // make text inside atom
         textSize(20)
-        fill(colLine)
+        noStroke()
+        if (this.mOver) fill(colLine); else fill(this.col);
         textAlign(CENTER)
         text(this.writtenCharge,this.x,this.y+txt.heading/3)
 
