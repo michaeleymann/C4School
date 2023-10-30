@@ -275,7 +275,6 @@ function draw(){
     textSize(txt.body)
     text(description.text,description.x,description.y,description.max)
 
-
 } // END OF DRAW LOOP
 
 

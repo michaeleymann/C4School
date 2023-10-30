@@ -3,10 +3,11 @@ class Energieniveau {
     constructor(id, ypos) {
       this.id = id,
       this.y = ypos,
-      this.x = 80,
-      this.width = 150, // CHANGE MOUSE/TOUCH FUNCTIONS WHEN CHANGING THIS!
+      this.x = niveausXpos,
+      this.n = id, 
+      this.width = niveausSize, // CHANGE MOUSE/TOUCH FUNCTIONS WHEN CHANGING THIS!
       this.thickness = 2,
-      this.color = colLine,
+      this.color = col[this.id],
       this.highlightColor = colHighlight,
       this.draggedColor = colDragged,
       this.dragged = false,
@@ -24,7 +25,10 @@ class Energieniveau {
         
           // Übergangspfeile mit Niveaus bewegen, wenn diese verschoben werden
           this.updateUeberaenge();
-        }
+        } 
+
+        
+        
     }
 
     updateUeberaenge() {
@@ -70,20 +74,24 @@ class Energieniveau {
     released() {
         
         // Prevent stacking niveaus on top of each other
+        // And update niveau.n according to the position 
 
-        let positions = [];
+        let otherPositions = [];
         for (let n = 0; n < niveaus.length; n++) {
+
             if ( n != this.id){
-                positions.push(niveaus[n].y)
+                otherPositions.push(niveaus[n].y)
             }
         }
-        for ( let pos of positions){
+        for ( let pos of otherPositions){
             // 3 is the margin for not stacking niveaus on top of each other
             if ( this.y > (pos-3) && this.y < (pos+3) ){
                 this.y = this.lastpos
                 this.updateUeberaenge()
             }
-        }        
+        }      
+  
+
        
         // Drop niveau at given place
         this.dragged = false;
@@ -108,9 +116,9 @@ class Energieniveau {
         fill(colLine);
         noStroke();
         textSize(10)
-        textFont("monospace")
+        //textFont("monospace")
         textAlign(RIGHT)
-        text(this.eV.toFixed(1) + " eV", this.x - 10, this.y + 3)
+        text("n = "+ (this.n+1) + " ("+this.eV.toFixed(1) + " eV)", this.x - 10, this.y + 3)
         pop()
         
     }
@@ -129,7 +137,7 @@ class Uebergang {
       this.deleted = false,
       this.eV = mapEnergy(abs(this.startY-this.endY), false),
       this.wavelength = 1239.8/(this.eV+0.00000001)
-      this.bande = new Bande (350, 360, this.wavelength, 400, colHighlight, false)
+      this.bande = new Bande (spectrumXpos+10, spectrumYpos + spectrumDistance, this.wavelength, 400, colHighlight, false)
     }
     
     released() {
@@ -145,7 +153,7 @@ class Uebergang {
             if ( this.endY > niveau.y-5 && this.endY < niveau.y+5 ) {
                 this.deleted = false;
                 this.endY = niveau.y;
-                this.endLocked = niveau.id
+                this.endLocked = niveau.id;
             } 
         }
     }
@@ -162,10 +170,11 @@ class Uebergang {
                 if ( this.startY > niveau.y-5 && this.startY < niveau.y+5 ) {
                     this.deleted = false;
                     this.startY = niveau.y;
-                    this.startLocked = niveau.id;
+                    this.startLocked = niveau.id; 
                 }  
             }
         }
+
 
         this.eV = mapEnergy(abs(this.startY-this.endY), false);
         this.wavelength = 1239.8/(this.eV+0.00000001);
@@ -177,6 +186,16 @@ class Uebergang {
     }
 
     show(){
+        if (!this.dragged && !this.deleted) {
+            for ( let niveau of niveaus ) {
+                let y = Math.max(this.endY, this.startY)
+                if (y == niveau.y) {
+                    this.color = col[niveau.n]
+                    this.bande.color = col[niveau.n]
+                }
+            }
+
+        }
         strokeWeight(this.thickness)
         stroke(this.color)
         fill(this.color)
@@ -201,7 +220,7 @@ class Bande {
         this.y = yOrigin,
         this.length = 20,
         this.width = width,
-        this.weight = 1,
+        this.weight = bandeThickness,
         this.color = color,
         this.fixed = isFixed
     

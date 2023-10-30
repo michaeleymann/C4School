@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+
+:root {
+    --sidebarWidth: 15rem;
+    --darkGrey: #201d19;
+    --lightGrey: #fafafa;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0.7rem;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--lightGrey);
+    background-color: var(--darkGrey);
+    user-select: none;
+    overflow: hidden;
+}
+
+stage,
+svg,
+path {
+    position: fixed;
+    overflow: visible;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 4rem;
+    margin-top: 0rem;
+}
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    margin-top: 0;
+    font-weight: 700;
+    line-height: 1.9rem;
+    }
+
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 20rem; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #6699cc; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sidebar_content {
+  padding: 4rem 2rem;
+  width: 15rem;
+}
+
+.sidebar_button{
+  top:0rem;
+  right:0.25rem;
+  position: absolute;
+  font-size:1.5rem;
+}
+.content{
+    position:fixed;
+    top: 1rem;
+    left: 1rem;
+    margin-left: 20rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: var(--darkGrey);
+    transition: margin-left .5s;
+}
+  

@@ -15,7 +15,7 @@ function drawForceRectangle(){
     noStroke()
     let distance = dist (atoms[0].x,atoms[0].y,atoms[1].x,atoms[1].y) / 10
     let force =  20000 * atoms[0].charge * atoms[1].charge / ( distance * distance ) 
-    fill(darkYellow)
+    fill(lightYellow)
     rect(canvasWidth/2,canvasHeight-60,force,20)
 }
 
@@ -29,7 +29,7 @@ function drawGraphicElements() {
     rect(0,0,canvasWidth,canvasHeight)
     
     //Background Grid
-    stroke(lightYellow)
+    stroke(colLine)
     //Vertical
     for ( let x = 1; x < 12 ; x++) {
         line(x*100,50,x*100,canvasHeight-150)

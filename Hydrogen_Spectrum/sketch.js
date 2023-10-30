@@ -14,8 +14,7 @@ let balmerSeries = [656.3, 486.1, 434, 410.2, 364.6]; // del 397.0
 let paschenSeries = [1875, 1282, 1094, 1500, 820]; //del 945.6 1005
 
 // ----------- COLORS  -----------
-colBG = "#201d19";
-colLine = "#ffffff";
+
 colHighlight = "#eb5e28";
 colDragged = "#F29875";
 colArrow = "#eb5e28";
@@ -25,43 +24,45 @@ colGrey = "#4b4b4b"
 
 // ----------- P5 SETUP  -----------
 function setup(){
+    textFont("Open Sans");
+    createCanvas(1000,700);
     
-    createCanvas(800,500);
     
     //!! id's (first number) need to be 0,1,2 etc
-    niveaus.push(new Energieniveau(0, 400))
-    niveaus.push(new Energieniveau(1, 150))
-    niveaus.push(new Energieniveau(2, 90))
-    niveaus.push(new Energieniveau(3, 60))
-    niveaus.push(new Energieniveau(4, 40))
-    niveaus.push(new Energieniveau(5, 30))
-    niveaus.push(new Energieniveau(6, 130))
+    niveaus.push(new Energieniveau(0, 500))
+    niveaus.push(new Energieniveau(1, 300))
+    niveaus.push(new Energieniveau(2, 230))
+    niveaus.push(new Energieniveau(3, 180))
+    niveaus.push(new Energieniveau(4, 140))
+    niveaus.push(new Energieniveau(5, 100))
+    niveaus.push(new Energieniveau(6, 70))
+  
 
-
+ 
     // Buttons
     niveauButton = createButton("Energieniveaus verschieben")
-    niveauButton.position(350,30)
+    niveauButton.position(buttonXpos,buttonYpos)
     niveauButton.mousePressed( function() {state = "Energieniveaus"})
     niveauButton.id("niveauButton")
     uberButton = createButton("Übergänge zeichnen")
-    uberButton.position(350,60)
+    uberButton.position(buttonXpos,buttonYpos + buttonSpacing)
     uberButton.mousePressed( function() {state = "Uebergaenge"})
     uberButton.id("uberButton")
     deleteButton = createButton("Übergänge Löschen")
-    deleteButton.position(350,90)
+    deleteButton.position(buttonXpos,buttonYpos + 2 * buttonSpacing)
     deleteButton.mousePressed( function() {uebergaenge = []})
 
     // Banden zeichen
     for ( let l of lymannSeries) {
-        banden.push( new Bande (350, 300, l, 400, colLine, true) )
+        banden.push( new Bande (spectrumXpos+10, spectrumYpos, l, 400, col[0], true) )
     }
 
     for ( let b of balmerSeries) {
-        banden.push( new Bande (350, 300, b, 400, colLine, true) )
+        banden.push( new Bande (spectrumXpos+10, spectrumYpos, b, 400, col[1], true) )
     }
 
     for ( let p of paschenSeries) {
-        banden.push( new Bande (350, 300, p, 400, colLine,  true) )
+        banden.push( new Bande (spectrumXpos+10, spectrumYpos, p, 400, col[2],  true) )
     }
 
 }
@@ -74,21 +75,41 @@ function mousePressed() {
         for ( let niveau of niveaus ){
             niveau.pressed()
         }
-    } else if ( state == "Uebergaenge" && mouseX > 80 && mouseX < 230) {
+    } else if ( state == "Uebergaenge" && mouseX > niveausXpos && mouseX < (niveausXpos + niveausSize ) ) {
         uebergaenge.push( new Uebergang(mouseX, mouseY));
     }
 }
 
 function mouseReleased() {
 
+
+
     if ( state == "Energieniveaus" ){  
+        //release niveaus, jump back to old pos if necessary
         for ( let niveau of niveaus ){
-            niveau.released()
+            if (niveau.dragged) {niveau.released()};
+        }
+        //make an array for all y positions
+        let allPositions = [];
+
+        //populate the array with the y values of the niveaus
+        for ( let n = 0; n < niveaus.length; n++ ){
+            allPositions.push(niveaus[n].y)
+        }
+        // sort the array
+        allPositions = allPositions.sort(function (a, b) {  return b - a;  }); 
+
+        // go through the niveaus again, and give new id
+        for ( let niveau of niveaus ){
+            //Give each Niveau a New ID based on its position
+            niveau.n = allPositions.indexOf(niveau.y)
+            niveau.color = col[niveau.n]
         }
 
+
     } else if ( state == "Uebergaenge" ) {
-        for ( let uebergaeng of uebergaenge){
-            uebergaeng.released()
+        for ( let uebergang of uebergaenge){
+            if (uebergang.dragged) {uebergang.released()};
         }
 
     }
@@ -102,7 +123,7 @@ function touchStarted(){
             niveau.pressed()
 
         }
-    } else if ( state == "Uebergaenge" && mouseX > 80 && mouseX < 230) {
+    } else if ( state == "Uebergaenge" && mouseX > niveausXpos && mouseX < (niveausXpos + niveausSize )) {
         uebergaenge.push( new Uebergang(mouseX, mouseY))
     }
 }
@@ -110,14 +131,14 @@ function touchStarted(){
 // Map Energy
 
 function mapEnergy(value, isNiveau) {
-    let min = 0;
-    let max = 500;
-    let minE = 1;
+    let min = 70;
+    let max = 570;
+    let minE = 0;
     let maxE = -15;
     if ( isNiveau ) {
         return map(value, min, max, minE, maxE);
     } else {
-        return map(value, min,max,0, abs(maxE-minE))
+        return map(value+min, min, max, 0, abs(maxE-minE))
     }
  
 }
@@ -152,54 +173,80 @@ function draw(){
     push()
     stroke(255)
     noFill()
-    rect(0,0,800,500)
+    rect(0,0,900,700)
     pop()
 
-    // Erstes Epektrum
+    // Erstes Spektrum
     strokeWeight(1.5)
     stroke(colLine)
-    line(340,300,750,300)
-    line(340,320,750,320)
-
-    line(350,300,350,295)
-    line(435,300,435,295)
-    line(540,300,540,295)
-    line(645,300,645,295)
+    line(spectrumXpos,spectrumYpos,spectrumXpos+410,spectrumYpos)
+    line(spectrumXpos,spectrumYpos+20,spectrumXpos+410,spectrumYpos+20)
+    //340
+    line(spectrumXpos+10,spectrumYpos,spectrumXpos+10,spectrumYpos-5)
+    line(spectrumXpos+95,spectrumYpos,spectrumXpos+95,spectrumYpos-5)
+    line(spectrumXpos+200,spectrumYpos,spectrumXpos+200,spectrumYpos-5)
+    line(spectrumXpos+305,spectrumYpos,spectrumXpos+305,spectrumYpos-5)
 
     noStroke()
-    fill(colLine);
-    textFont("monospace")
+    fill(colLine)
+    //textFont("monospace")
     textSize(12)
-    text("Gemessenes Wasserstoffpektrum", 342, 260 )
+    text("GEMESSENES WASSERSTOFFSPEKTRUM", spectrumXpos+2, spectrumYpos - 40 )
     textSize(10)
-    text("100", 342, 290 )
-    text("400", 427, 290 )
-    text("1000", 528, 290 )
-    text("1500", 633, 290 )
-    text("nm", 735, 290 )
+    text("100", spectrumXpos+2, spectrumYpos-10 )
+    text("400", spectrumXpos+87, spectrumYpos-10  )
+    text("1000", spectrumXpos+188, spectrumYpos-10  )
+    text("1500", spectrumXpos+293, spectrumYpos-10  )
+    text("nm", spectrumXpos+395, spectrumYpos-10 )
 
     
     // Zweites Spektrum
    
     fill(colHighlight)
     textSize(12)
-    text("Berechnetes Wasserstoffpektrum", 342, 430 )
+    text("BERECHNETES WASSERSTOFFSPEKTRUM", spectrumXpos+2, spectrumYpos + spectrumDistance + 70 )
     textSize(10)
-    text("100", 342, 400 )
-    text("400", 427, 400 )
-    text("1000", 528, 400 )
-    text("1500", 633, 400 )
-    text("nm", 735, 400 )
+    text("100", spectrumXpos+2, spectrumYpos + spectrumDistance + 40 )
+    text("400", spectrumXpos+87, spectrumYpos + spectrumDistance + 40 )
+    text("1000", spectrumXpos+188, spectrumYpos + spectrumDistance + 40 )
+    text("1500", spectrumXpos+293, spectrumYpos + spectrumDistance + 40 )
+    text("nm", spectrumXpos+395, spectrumYpos + spectrumDistance + 40 )
        
     stroke(colHighlight)
-    line(340,360,750,360)
-    line(340,380,750,380)
+    line(spectrumXpos,spectrumYpos+spectrumDistance,spectrumXpos+410,spectrumYpos+spectrumDistance)
+    line(spectrumXpos,spectrumYpos+spectrumDistance+20,spectrumXpos+410,spectrumYpos+spectrumDistance+20)
     
-    line(350,385,350,380)
-    line(435,385,435,380)
-    line(540,385,540,380)
-    line(645,385,645,380)
-   
+    line(spectrumXpos+10,spectrumYpos+spectrumDistance+20,spectrumXpos+10,spectrumYpos+spectrumDistance+25)
+    line(spectrumXpos+95,spectrumYpos+spectrumDistance+20,spectrumXpos+95,spectrumYpos+spectrumDistance+25)
+    line(spectrumXpos+200,spectrumYpos+spectrumDistance+20,spectrumXpos+200,spectrumYpos+spectrumDistance+25)
+    line(spectrumXpos+305,spectrumYpos+spectrumDistance+20,spectrumXpos+305,spectrumYpos+spectrumDistance+25)
+    
+    // Legende
+    textSize(12)
+    noStroke()
+    fill(colLine)
+    text("ENERGIENIVEAUS", niveausXpos-80, legendeYpos+8)
+    text("LEGENDE", legendeXpos, legendeYpos+8 )
+    text("AKTIONEN", buttonXpos, legendeYpos+8)
+    fill(col[0])
+    square(legendeXpos,legendeYpos+legendeSpacing,8)
+    text("Lymann-Serie", legendeXpos+20, legendeYpos+legendeSpacing+8 )
+    fill(col[1])
+    square(legendeXpos,legendeYpos+2*legendeSpacing,8)
+    text("Balmer-Serie", legendeXpos+20, legendeYpos+2*legendeSpacing+8 )
+    fill(col[2])
+    square(legendeXpos,legendeYpos+3*legendeSpacing,8)
+    text("Paschen-Serie", legendeXpos+20, legendeYpos+3*legendeSpacing+8 )
+
+     // TEXT
+     noStroke();
+     fill(colLine)
+     push()
+     textAlign(CENTER)
+     textWrap(WORD)
+     textSize(12)
+     text(description.text,description.x,description.y,description.max)
+     pop()
 
     // ----------- DO ALL THE FUN STUFF  -----------
     
